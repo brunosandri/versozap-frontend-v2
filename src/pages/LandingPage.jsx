@@ -11,7 +11,6 @@ export default function LandingPage() {
             <img src="/imagens/logoversozap.png" className="h-10" />
           </div>
           <nav className="flex items-center gap-6 text-sm font-medium">
-            <a href="#" className="hover:text-emerald-600">Preços</a>
             <a href="#" className="hover:text-emerald-600">Entrar</a>
             <a
               href="#"
@@ -25,7 +24,7 @@ export default function LandingPage() {
 
       {/* Hero */}
       <main className="flex-1 flex flex-col-reverse lg:flex-row items-center max-w-6xl mx-auto px-6 py-20 gap-12">
-        <div className="w-full lg:w-1/2 text-center lg:text-left">
+        <div className="w-full lg:w-1/2 text-center lg:text-left mt-12 lg:mt-0">
           <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">
             Leia a bíblia <span className="text-emerald-500">diariamente</span><br />
             no seu WhatsApp
@@ -45,7 +44,7 @@ export default function LandingPage() {
           <img
             src="/imagens/imagemlanding.png"
             alt="Exemplo de conversa no WhatsApp"
-            className="w-[300px] sm:w-[340px] md:w-[380px] lg:w-[420px]"
+            className="w-[280px] sm:w-[340px] md:w-[380px] lg:w-[420px]"
           />
         </div>
       </main>
