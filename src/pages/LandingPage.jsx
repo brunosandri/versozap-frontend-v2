@@ -9,7 +9,6 @@ export default function LandingPage() {
         <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
           <div className="flex items-center gap-2">
             <img src="/imagens/logoversozap.png" className="h-10" />
-            <span className="text-2xl font-bold tracking-tight">Versozap</span>
           </div>
           <nav className="flex items-center gap-6 text-sm font-medium">
             <a href="#" className="hover:text-emerald-600">Preços</a>
@@ -32,13 +31,13 @@ export default function LandingPage() {
             no seu WhatsApp
           </h1>
           <p className="mt-6 text-gray-600 text-base md:text-lg max-w-md mx-auto lg:mx-0">
-            Escolha a versão, o plano de leitura e o horário. A Palavra ao seu alcance todos os dias.
+            Escolha a versão, o plano de leitura e o horário para começar o seu cronograma de leitura
           </p>
           <a
             href="#"
             className="inline-block mt-8 px-6 py-3 bg-emerald-500 text-white font-medium rounded hover:bg-emerald-600 transition"
           >
-            Conecte-se agora
+            Comece agora!
           </a>
         </div>
 
