@@ -8,7 +8,7 @@ export default function LandingPage() {
       <header className="w-full border-b">
         <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
           <div className="flex items-center gap-2">
-            <img src="/imagens/logoversozap.png" alt="Versozap" className="h-8" />
+            <img src="/imagens/logoversozap.png" className="h-10" />
             <span className="text-2xl font-bold tracking-tight">Versozap</span>
           </div>
           <nav className="flex items-center gap-6 text-sm font-medium">
@@ -28,8 +28,8 @@ export default function LandingPage() {
       <main className="flex-1 flex flex-col-reverse lg:flex-row items-center max-w-6xl mx-auto px-6 py-20 gap-12">
         <div className="w-full lg:w-1/2 text-center lg:text-left">
           <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">
-            Receba <span className="text-emerald-500">trechos da bíblia</span><br />
-            diariamente no seu WhatsApp
+            Leia a bíblia <span className="text-emerald-500">diariamente</span><br />
+            no seu WhatsApp
           </h1>
           <p className="mt-6 text-gray-600 text-base md:text-lg max-w-md mx-auto lg:mx-0">
             Escolha a versão, o plano de leitura e o horário. A Palavra ao seu alcance todos os dias.
@@ -46,7 +46,7 @@ export default function LandingPage() {
           <img
             src="/imagens/imagemlanding.png"
             alt="Exemplo de conversa no WhatsApp"
-            className="w-[300px] sm:w-[340px] md:w-[380px] lg:w-[420px] rounded-xl shadow-2xl"
+            className="w-[300px] sm:w-[340px] md:w-[380px] lg:w-[420px]"
           />
         </div>
       </main>
