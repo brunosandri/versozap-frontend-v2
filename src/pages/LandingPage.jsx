@@ -39,7 +39,7 @@ export default function LandingPage() {
 
         <div className="flex-1">
           <img
-            src="/imagem/imagemlanding.png"
+            src="/imagens/imagemlanding.png"
             alt="Exemplo de conversa transcrita"
             className="w-full max-w-md mx-auto rounded shadow-2xl"
           />
