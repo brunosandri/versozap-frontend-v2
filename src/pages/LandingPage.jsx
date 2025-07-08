@@ -6,7 +6,7 @@ export default function LandingPage() {
      {/* Header */}
       <header className="flex items-center justify-between p-6 max-w-6xl mx-auto">
         <div className="flex items-center gap-2">
-          <img src="/versozap-frontend-v2.vercel.app/logoversozap.png" alt="VersoZap" className="h-6" />
+          <img src="/imagens/logoversozap.png" alt="VersoZap" className="h-6" />
           <span className="text-xl font-semibold">Versozap</span>
         </div>
         <nav className="flex items-center gap-6">
@@ -39,7 +39,7 @@ export default function LandingPage() {
 
         <div className="flex-1">
           <img
-            src="/versozap-frontend-v2.vercel.app/imagemlanding.png"
+            src="/imagem/imagemlanding.png"
             alt="Exemplo de conversa transcrita"
             className="w-full max-w-md mx-auto rounded shadow-2xl"
           />
