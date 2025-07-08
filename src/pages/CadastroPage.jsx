@@ -1,64 +1,69 @@
-import { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useState } from "react";
+import axios from "axios";
 
 export default function CadastroPage() {
   const [form, setForm] = useState({
-    nome: '', telefone: '', versao_biblia: 'ARA', plano_leitura: 'anual', tipo_ordem: 'normal', horario_envio: '08:00'
+    nome: "",
+    telefone: "",
+    versao_biblia: "NVI",
+    plano_leitura: "12 meses",
+    tipo_ordem: "tradicional",
+    horario_envio: "08:00",
   });
-  const [status, setStatus] = useState('');
 
-  const handleChange = e => setForm({ ...form, [e.target.name]: e.target.value });
+  const [mensagem, setMensagem] = useState("");
 
-  const handleSubmit = async e => {
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('https://versozap-backend.onrender.com/cadastrar', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form)
-      });
-      if (res.ok) {
-        setStatus('sucesso');
-      } else {
-        setStatus('erro');
-      }
-    } catch {
-      setStatus('erro');
+      const response = await axios.post("https://seu-backend/cadastrar", form);
+      setMensagem("Cadastro realizado com sucesso!");
+      console.log(response.data);
+      // redirecionar se quiser, ex: navigate("/dashboard");
+    } catch (err) {
+      setMensagem("Erro ao cadastrar usuário");
+      console.error(err);
     }
   };
 
-  if (status === 'sucesso') return <Navigate to="/sucesso" />;
-
   return (
-    <div className="p-6 max-w-xl mx-auto">
-      <h2 className="text-2xl font-semibold mb-4">Cadastro no VersoZap</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input name="nome" placeholder="Nome" className="w-full border p-2 rounded" onChange={handleChange} required />
-        <input name="telefone" placeholder="Telefone (com DDD)" className="w-full border p-2 rounded" onChange={handleChange} required />
+    <div className="max-w-xl mx-auto p-6">
+      <h1 className="text-2xl font-bold mb-6">Preencha seus dados</h1>
 
-        <select name="versao_biblia" className="w-full border p-2 rounded" onChange={handleChange}>
-          <option value="ARA">Almeida RA</option>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <input name="nome" placeholder="Nome completo" value={form.nome} onChange={handleChange} className="w-full border p-2 rounded" required />
+        <input name="telefone" placeholder="WhatsApp com DDD" value={form.telefone} onChange={handleChange} className="w-full border p-2 rounded" required />
+
+        <select name="versao_biblia" value={form.versao_biblia} onChange={handleChange} className="w-full border p-2 rounded">
           <option value="NVI">NVI</option>
-          <option value="ACF">ACF</option>
+          <option value="ARA">ARA</option>
           <option value="NTLH">NTLH</option>
         </select>
 
-        <select name="plano_leitura" className="w-full border p-2 rounded" onChange={handleChange}>
-          <option value="anual">Anual</option>
-          <option value="misto">Misto (VT + NT)</option>
-          <option value="cronologico">Cronológico</option>
+        <select name="plano_leitura" value={form.plano_leitura} onChange={handleChange} className="w-full border p-2 rounded">
+          <option value="6 meses">6 meses (rápido)</option>
+          <option value="12 meses">12 meses (regular)</option>
+          <option value="18 meses">18 meses (no seu ritmo)</option>
         </select>
 
-        <select name="tipo_ordem" className="w-full border p-2 rounded" onChange={handleChange}>
-          <option value="normal">Ordem tradicional</option>
-          <option value="cronologico">Ordem cronológica</option>
+        <select name="tipo_ordem" value={form.tipo_ordem} onChange={handleChange} className="w-full border p-2 rounded">
+          <option value="tradicional">Tradicional</option>
+          <option value="cronológica">Cronológica</option>
         </select>
 
-        <input name="horario_envio" type="time" className="w-full border p-2 rounded" onChange={handleChange} required />
+        <input name="horario_envio" type="time" value={form.horario_envio} onChange={handleChange} className="w-full border p-2 rounded" />
 
-        <button type="submit" className="bg-green-700 text-white px-6 py-2 rounded w-full">Cadastrar</button>
+        <button type="submit" className="bg-emerald-500 text-white px-6 py-2 rounded hover:bg-emerald-600">
+          Finalizar Cadastro
+        </button>
       </form>
-      {status === 'erro' && <p className="text-red-600 mt-3">Erro ao cadastrar. Tente novamente.</p>}
+
+      {mensagem && <p className="mt-4 text-center text-sm text-gray-700">{mensagem}</p>}
     </div>
   );
 }
+
