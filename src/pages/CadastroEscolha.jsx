@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { Mail, Facebook, Globe } from 'lucide-react';
 
 export default function CadastroEscolha() {
   return (
