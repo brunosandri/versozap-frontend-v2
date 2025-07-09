@@ -16,7 +16,7 @@ export default function LandingPage() {
               href="#"
               className="px-4 py-1 rounded bg-emerald-500 text-white hover:bg-emerald-600 transition"
             >
-              <Link to="/cadastro" className="px-4 py-1 rounded bg-emerald-500 text-white text-sm hover:bg-emerald-600">
+              <Link to="/registrar" className="px-4 py-1 rounded bg-emerald-500 text-white text-sm hover:bg-emerald-600">
               Cadastrar
               </Link>
             </a>

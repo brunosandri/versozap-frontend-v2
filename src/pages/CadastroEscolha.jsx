@@ -10,20 +10,20 @@ export default function CadastroEscolha() {
       <h2 className="text-2xl font-bold mb-6">Cadastrar</h2>
 
       <div className="w-full max-w-sm flex flex-col gap-4">
-        <Link to="/cadastro" className="bg-green-600 text-white py-3 rounded-lg flex justify-center items-center gap-2">
+        <Link to="/cadastro/email" className="bg-green-600 text-white py-3 rounded-lg flex justify-center items-center gap-2">
           <span>Continuar com e-mail</span>
           <span>📧</span>
         </Link>
 
-        <button className="bg-gray-100 py-3 rounded-lg flex justify-center items-center gap-2">
+        <Link to="/cadastro/google" className="bg-gray-100 py-3 rounded-lg flex justify-center items-center gap-2">
           <span>Continuar com Google</span>
           <span>🌐</span>
-        </button>
+        </Link>
 
-        <button className="bg-gray-100 py-3 rounded-lg flex justify-center items-center gap-2">
+        <Link to="/cadastro/facebook" className="bg-gray-100 py-3 rounded-lg flex justify-center items-center gap-2">
           <span>Continuar com Facebook</span>
           <span>📘</span>
-        </button>
+        </Link>
 
         <Link to="/login" className="text-green-600 text-sm mt-2">
           Já tenho uma conta →
