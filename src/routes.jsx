@@ -14,7 +14,7 @@ export default function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
-      <Route path="/cadastro" element={<Cadastro />} />
+      <Route path="/registrar" element={<Cadastro />} />
       <Route path="/cadastro-email" element={<CadastroEmail />} />
       <Route path="/cadastro-google" element={<CadastroGoogle />} />
       <Route path="/cadastro-facebook" element={<CadastroFacebook />} />

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-white text-gray-900 flex flex-col justify-between">
-      
       {/* Header */}
       <header className="w-full border-b">
         <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
@@ -11,15 +10,18 @@ export default function LandingPage() {
             <img src="/imagens/logoversozap.png" className="h-10" />
           </div>
           <nav className="flex items-center gap-6 text-sm font-medium">
-            <a href="#" className="hover:text-emerald-600">Entrar</a>
-            <a
-              href="#"
+            {/* Link interno para a página de login */}
+            <Link to="/login" className="hover:text-emerald-600">
+              Entrar
+            </Link>
+
+            {/* Link interno para a página de cadastro */}
+            <Link
+              to="/cadastro"
               className="px-4 py-1 rounded bg-emerald-500 text-white hover:bg-emerald-600 transition"
             >
-              <Link to="/registrar" className="px-4 py-1 rounded bg-emerald-500 text-white text-sm hover:bg-emerald-600">
               Cadastrar
-              </Link>
-            </a>
+            </Link>
           </nav>
         </div>
       </header>
@@ -34,12 +36,14 @@ export default function LandingPage() {
           <p className="mt-6 text-gray-600 text-base md:text-lg max-w-md mx-auto lg:mx-0">
             Escolha a versão, o plano de leitura e o horário para começar o seu cronograma de leitura
           </p>
-          <a
-            href="#"
+
+          {/* Botão principal direcionando para cadastro */}
+          <Link
+            to="/cadastro"
             className="inline-block mt-8 px-6 py-3 bg-emerald-500 text-white font-medium rounded hover:bg-emerald-600 transition"
           >
             Comece agora!
-          </a>
+          </Link>
         </div>
 
         <div className="w-full lg:w-1/2 flex justify-center">
@@ -56,8 +60,9 @@ export default function LandingPage() {
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
           <p>© Versozap • 2025</p>
           <div className="flex gap-4">
-            <a href="#" className="hover:text-emerald-500">Termos de uso</a>
-            <a href="#" className="hover:text-emerald-500">Política de privacidade</a>
+            {/* Mantenha <a> para links externos ou coloque rotas internas se existirem */}
+            <Link to="/termos" className="hover:text-emerald-500">Termos de uso</Link>
+            <Link to="/privacidade" className="hover:text-emerald-500">Política de privacidade</Link>
             <a href="https://instagram.com/versozap" target="_blank" rel="noreferrer" className="hover:text-emerald-500">@versozap</a>
           </div>
           <select className="bg-transparent outline-none">
@@ -69,3 +74,5 @@ export default function LandingPage() {
     </div>
   );
 }
+
+
