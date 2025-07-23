@@ -11,7 +11,7 @@ export default function CadastroFacebook() {
           onClick={() => alert("Simulando autenticação com Facebook...")}
           className="w-full py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
         >
-          Conectar com Facebook
+          Conectar com o Facebook
         </button>
       </div>
     </div>
