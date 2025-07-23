@@ -13,7 +13,7 @@ export default function Cadastro() {
       {/* Botões de cadastro */}
       <div className="space-y-4 w-full max-w-sm">
         <button
-        onClick={() => navigate("/cadastro-email")}
+        onClick={() => navigate("/cadastro/email")}
         className="w-full flex items-center justify-center gap-2 bg-emerald-500 text-white py-3 rounded-md hover:bg-emerald-600 transition">
           <span>Continuar com e-mail</span>
           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
