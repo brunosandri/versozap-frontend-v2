@@ -4,7 +4,7 @@ export default function AssinaturaPage() {
       <h2 className="text-3xl font-bold text-green-700 mb-4">Plano VersoZap Premium</h2>
 
       <p className="text-gray-700 mb-6 max-w-md">
-        Com o plano Premium você terá acesso a:
+        Com o plano Premium você terá acesso a isso:
       </p>
 
       <ul className="text-left text-gray-600 mb-6 list-disc list-inside">
