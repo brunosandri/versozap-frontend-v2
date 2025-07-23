@@ -8,7 +8,7 @@ export default function Cadastro() {
       <img src="/imagens/logoversozap.png" alt="Logo" className="h-10 mb-12" />
 
       {/* Título */}
-      <h1 className="text-2xl font-bold mb-8 text-center">Cadastrar</h1>
+      <h1 className="text-2xl font-bold mb-8 text-center">o que você prefere?</h1>
 
       {/* Botões de cadastro */}
       <div className="space-y-4 w-full max-w-sm">

@@ -1,64 +1,120 @@
-import { useState } from "react";
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function CadastroEmail() {
-  const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
+  const [form, setForm] = useState({ email: '', password: '', confirm: '' });
+  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const validate = () => {
+    const errs = {};
+    if (!form.email) errs.email = 'E-mail obrigatório';
+    else if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(form.email)) errs.email = 'Formato de e-mail inválido';
+
+    if (!form.password) errs.password = 'Senha obrigatória';
+    else if (form.password.length < 6) errs.password = 'Mínimo 6 caracteres';
+
+    if (form.confirm !== form.password) errs.confirm = 'As senhas não coincidem';
+    return errs;
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Cadastro:", { email, senha });
-    // Aqui você pode chamar sua API ou função de cadastro
+    const errs = validate();
+    setErrors(errs);
+    if (Object.keys(errs).length) return;
+
+    setLoading(true);
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: form.email, password: form.password }),
+      });
+
+      if (!res.ok) {
+        const { error } = await res.json();
+        throw new Error(error || 'Falha no cadastro');
+      }
+
+      navigate('/login');
+    } catch (err) {
+      setErrors({ api: err.message });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white px-4">
-      <div className="max-w-sm w-full space-y-6">
-        <h2 className="text-2xl font-bold text-center">Cadastrar com e-mail</h2>
+    <div className="min-h-screen flex flex-col">
+      <header className="w-full border-b">
+        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+          <img src="/imagens/logoversozap.png" className="h-8" alt="Logo Versozap" />
+          <Link to="/login" className="text-sm text-emerald-600 hover:underline">
+            Já tem conta? Entrar
+          </Link>
+        </div>
+      </header>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+      <main className="flex-1 flex items-center justify-center px-6">
+        <form onSubmit={handleSubmit} className="w-full max-w-sm space-y-4">
+          <h1 className="text-2xl font-bold text-center">Cadastro por e-mail</h1>
+
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-              E-mail
-            </label>
+            <label className="block text-sm mb-1" htmlFor="email">E-mail</label>
             <input
               id="email"
               type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              className={`w-full border rounded px-3 py-2 focus:outline-none focus:ring ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
             />
+            {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
           </div>
 
           <div>
-            <label htmlFor="senha" className="block text-sm font-medium text-gray-700">
-              Senha
-            </label>
+            <label className="block text-sm mb-1" htmlFor="password">Senha</label>
             <input
-              id="senha"
+              id="password"
               type="password"
-              required
-              value={senha}
-              onChange={(e) => setSenha(e.target.value)}
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500"
+              name="password"
+              value={form.password}
+              onChange={handleChange}
+              className={`w-full border rounded px-3 py-2 focus:outline-none focus:ring ${errors.password ? 'border-red-500' : 'border-gray-300'}`}
             />
+            {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password}</p>}
+          </div>
+
+          <div>
+            <label className="block text-sm mb-1" htmlFor="confirm">Confirmar senha</label>
+            <input
+              id="confirm"
+              type="password"
+              name="confirm"
+              value={form.confirm}
+              onChange={handleChange}
+              className={`w-full border rounded px-3 py-2 focus:outline-none focus:ring ${errors.confirm ? 'border-red-500' : 'border-gray-300'}`}
+            />
+            {errors.confirm && <p className="text-red-500 text-xs mt-1">{errors.confirm}</p>}
           </div>
 
           <button
             type="submit"
-            className="w-full bg-emerald-500 text-white py-2 px-4 rounded hover:bg-emerald-600 transition"
+            disabled={loading}
+            className="w-full bg-emerald-500 text-white py-2 rounded hover:bg-emerald-600 disabled:opacity-50"
           >
-            Criar conta
+            {loading ? 'Registrando…' : 'Registrar'}
           </button>
-        </form>
 
-        <div className="text-center text-sm text-gray-500">
-          Já tem uma conta?{" "}
-          <a href="/login" className="text-emerald-600 hover:underline">
-            Entrar
-          </a>
-        </div>
-      </div>
+          {errors.api && <p className="text-red-500 text-sm text-center">{errors.api}</p>}
+        </form>
+      </main>
     </div>
   );
 }
