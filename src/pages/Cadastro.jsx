@@ -1,7 +1,8 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Mail, ArrowRight } from 'lucide-react'; // Ícones opcionais
 
 export default function Cadastro() {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-white flex flex-col items-center justify-center px-6">
       {/* Logo */}
@@ -23,6 +24,7 @@ export default function Cadastro() {
 
         {/* Botão: Google */}
         <button
+          onClick={() => navigate("/cadastro/google")}
           className="w-full flex items-center justify-center gap-3 border border-gray-300 py-3 rounded-md hover:bg-gray-100 transition"
         >
           <img src="/imagens/google-icon.png" alt="Google" className="h-5 w-5" />
@@ -31,6 +33,7 @@ export default function Cadastro() {
 
         {/* Botão: Facebook */}
         <button
+          onClick={() => navigate("/cadastro/facebook")}
           className="w-full flex items-center justify-center gap-3 bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition"
         >
           <img src="/imagens/facebook-icon.png" alt="Facebook" className="h-5 w-5" />

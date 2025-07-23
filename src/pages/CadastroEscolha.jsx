@@ -1,40 +1,69 @@
-import { Link } from 'react-router-dom';
-import { Mail, Facebook, Globe } from 'lucide-react';
+import { useState } from "react";
+import axios from "axios";
 
 export default function CadastroEscolha() {
+  const [form, setForm] = useState({
+    nome: "",
+    telefone: "",
+    versao_biblia: "NVI",
+    plano_leitura: "12 meses",
+    tipo_ordem: "tradicional",
+    horario_envio: "08:00",
+  });
+
+  const [mensagem, setMensagem] = useState("");
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("https://seu-backend/cadastrar", form);
+      setMensagem("Cadastro realizado com sucesso!");
+      console.log(response.data);
+      // redirecionar se quiser, ex: navigate("/dashboard");
+    } catch (err) {
+      setMensagem("Erro ao cadastrar usuário");
+      console.error(err);
+    }
+  };
+
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center px-4 text-center">
-      <div className="mb-6">
-        <h1 className="text-4xl font-bold text-green-700">VersoZap</h1>
-      </div>
+    <div className="max-w-xl mx-auto p-6">
+      <h1 className="text-2xl font-bold mb-6">Preencha seus dados</h1>
 
-      <h2 className="text-2xl font-bold mb-6">Cadastrar</h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <input name="nome" placeholder="Nome completo" value={form.nome} onChange={handleChange} className="w-full border p-2 rounded" required />
+        <input name="telefone" placeholder="WhatsApp com DDD" value={form.telefone} onChange={handleChange} className="w-full border p-2 rounded" required />
 
-      <div className="w-full max-w-sm flex flex-col gap-4">
-        <Link to="/cadastro/email" className="bg-green-600 text-white py-3 rounded-lg flex justify-center items-center gap-2">
-          <span>Continuar com e-mail</span>
-          <span>📧</span>
-        </Link>
+        <select name="versao_biblia" value={form.versao_biblia} onChange={handleChange} className="w-full border p-2 rounded">
+          <option value="NVI">NVI</option>
+          <option value="ARA">ARA</option>
+          <option value="NTLH">NTLH</option>
+        </select>
 
-        <Link to="/cadastro/google" className="bg-gray-100 py-3 rounded-lg flex justify-center items-center gap-2">
-          <span>Continuar com Google</span>
-          <span>🌐</span>
-        </Link>
+        <select name="plano_leitura" value={form.plano_leitura} onChange={handleChange} className="w-full border p-2 rounded">
+          <option value="6 meses">6 meses (rápido)</option>
+          <option value="12 meses">12 meses (regular)</option>
+          <option value="18 meses">18 meses (no seu ritmo)</option>
+        </select>
 
-        <Link to="/cadastro/facebook" className="bg-gray-100 py-3 rounded-lg flex justify-center items-center gap-2">
-          <span>Continuar com Facebook</span>
-          <span>📘</span>
-        </Link>
+        <select name="tipo_ordem" value={form.tipo_ordem} onChange={handleChange} className="w-full border p-2 rounded">
+          <option value="tradicional">Tradicional</option>
+          <option value="cronológica">Cronológica</option>
+        </select>
 
-        <Link to="/login" className="text-green-600 text-sm mt-2">
-          Já tenho uma conta →
-        </Link>
-      </div>
+        <input name="horario_envio" type="time" value={form.horario_envio} onChange={handleChange} className="w-full border p-2 rounded" />
 
-      <div className="text-xs text-gray-500 mt-10 space-y-1">
-        <p>Termos de uso</p>
-        <p>Política de privacidade</p>
-      </div>
+        <button type="submit" className="bg-emerald-500 text-white px-6 py-2 rounded hover:bg-emerald-600">
+          Finalizar Cadastro
+        </button>
+      </form>
+
+      {mensagem && <p className="mt-4 text-center text-sm text-gray-700">{mensagem}</p>}
     </div>
   );
 }
+
