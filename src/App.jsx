@@ -11,7 +11,7 @@ export default function App() {
       <Route path='/' element={<LandingPage />} />
       <Route path='/login' element={<LoginPage />} />
       <Route path='/cadastro' element={<Cadastro />} />
-      <Route path='/cadastro/email' element={<CadastroEmail />} />
+      <Route path='/cadastro-email' element={<CadastroEmail />} />
       {/* …outras rotas */}
     </Routes>
   );
